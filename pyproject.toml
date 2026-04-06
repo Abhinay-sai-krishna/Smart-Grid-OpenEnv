@@ -17,5 +17,9 @@ dependencies = [
     "pyyaml",
     "openai",
     "transformers",
-    "huggingface_hub"
+    "huggingface_hub",
+    "openenv-core>=0.2.0"
 ]
+
+[project.scripts]
+server = "server.app:app"
