@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "c:/Users/konda/OneDrive/Desktop/Scaler/SmartGridEnv"
+    ],
+    "python.defaultInterpreterPath": "C:/Users/konda/AppData/Local/Programs/Python/Python312/python.exe",
+    "python.analysis.pythonPath": "C:/Users/konda/AppData/Local/Programs/Python/Python312/python.exe"
+}

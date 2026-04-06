@@ -1,0 +1,19 @@
+name: "SmartGridOptimizer"
+version: "1.0.0"
+author: "Agent"
+description: "A Smart Grid environment where an agent controls a battery backup network. Maximize profit and grid stability by charging during low-demand/high-generation periods and discharging during peak demand."
+
+environment:
+  type: "http"
+  spec_version: "1.0"
+  endpoints:
+    reset: "/reset"
+    step: "/step"
+    state: "/state"
+    tasks: "/tasks"
+    grader: "/grader"
+    baseline: "/baseline"
+
+docker:
+  build_command: "docker build -t smart-grid-env ."
+  run_command: "docker run -p 7860:7860 smart-grid-env"
