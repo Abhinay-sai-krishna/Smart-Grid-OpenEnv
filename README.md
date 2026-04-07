@@ -1,5 +1,7 @@
 # SmartGridOptimizer - OpenEnv
 
+[![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/kondapalliabhinaysaikrishna/Smart-Grid-OpenEnv)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black)](https://github.com/Abhinay-sai-krishna/Smart-Grid-OpenEnv)
 A reinforcement learning environment strictly compliant with the OpenEnv specification. Simulate a real-world smart grid network running a 24-hour battery management cycle.
 
 ## Environment Description

@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: smart-grid-openenv
+Version: 0.1.0
+Summary: An OpenEnv-compliant Smart Grid reinforcement learning environment.
+Author: Abhinay Sai Krishna
+Requires-Python: >=3.10
+Requires-Dist: fastapi
+Requires-Dist: uvicorn
+Requires-Dist: pydantic
+Requires-Dist: pyyaml
+Requires-Dist: openai
+Requires-Dist: transformers
+Requires-Dist: huggingface_hub
+Requires-Dist: openenv-core>=0.2.0

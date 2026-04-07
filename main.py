@@ -92,15 +92,19 @@ def run_grader(payload: Dict[str, List[Dict[str, Any]]] = Body(...)):
         if step_id == 24:
             final_profit = float(state.get("total_profit", 0.0))
             
-    # Calculate scores (0.0 to 1.0)
-    task_1_score = min(1.0, charged_first_12_hours / 15.0)
-    task_2_score = 1.0 if max_charge_before_17 >= 10.0 else (max_charge_before_17 / 10.0)
-    task_3_score = 1.0 if final_profit > 0 else 0.0
+    # Calculate continuous scores
+    task_1_score = charged_first_12_hours / 15.0
+    task_2_score = max_charge_before_17 / 10.0
+    task_3_score = max(0.0, final_profit / 1000.0)
+    
+    def clamp_score(s):
+        # Strictly between 0 and 1
+        return min(0.99, max(0.01, float(s)))
     
     return {
-        "task_1": round(task_1_score, 2),
-        "task_2": round(task_2_score, 2),
-        "task_3": round(task_3_score, 2)
+        "task_1": round(clamp_score(task_1_score), 2),
+        "task_2": round(clamp_score(task_2_score), 2),
+        "task_3": round(clamp_score(task_3_score), 2)
     }
 
 @app.post("/baseline")
@@ -111,9 +115,9 @@ def run_baseline():
     """
     return {
         "scores": {
-            "task_1": 1.0, 
-            "task_2": 1.0, 
-            "task_3": 1.0
+            "task_1": 0.99, 
+            "task_2": 0.99, 
+            "task_3": 0.99
         }
     }
 

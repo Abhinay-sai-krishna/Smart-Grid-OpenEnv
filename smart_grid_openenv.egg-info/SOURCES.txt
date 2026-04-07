@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+server/app.py
+smart_grid_openenv.egg-info/PKG-INFO
+smart_grid_openenv.egg-info/SOURCES.txt
+smart_grid_openenv.egg-info/dependency_links.txt
+smart_grid_openenv.egg-info/entry_points.txt
+smart_grid_openenv.egg-info/requires.txt
+smart_grid_openenv.egg-info/top_level.txt
