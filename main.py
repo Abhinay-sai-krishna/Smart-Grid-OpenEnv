@@ -41,17 +41,20 @@ def get_tasks():
             {
                 "id": "task_1", 
                 "difficulty": "easy", 
-                "description": "Charge the battery with at least 15 MWh combined during the first 12 hours (cheap generation)."
+                "description": "Charge the battery with at least 15 MWh combined during the first 12 hours (cheap generation).",
+                "has_grader": True
             },
             {
                 "id": "task_2", 
                 "difficulty": "medium", 
-                "description": "Have at least 10 MWh of charge ready right before the peak hours start (hour 17)."
+                "description": "Have at least 10 MWh of charge ready right before the peak hours start (hour 17).",
+                "has_grader": True
             },
             {
                 "id": "task_3", 
                 "difficulty": "hard", 
-                "description": "Survive the full 24-hour cycle and finish with a total_profit strictly greater than exactly $0.00."
+                "description": "Survive the full 24-hour cycle and finish with a total_profit strictly greater than exactly $0.00.",
+                "has_grader": True
             }
         ]
     }
@@ -83,9 +86,8 @@ def run_grader(payload: Any = Body(None)):
         step_id = state.get("step_id", 0)
         
         # Task 1
-        info = step_log.get("info", {})
         if step_id < 12 and action.get("action_type") == "charge":
-            charged_first_12_hours += float(info.get("actual_action_taken", 0.0))
+            charged_first_12_hours += float(action.get("amount", 0.0))
             
         # Task 2
         if step_id == 17:
@@ -105,11 +107,9 @@ def run_grader(payload: Any = Body(None)):
         return min(0.99, max(0.01, float(s)))
     
     return {
-        "scores": {
-            "task_1": round(clamp_score(task_1_score), 2),
-            "task_2": round(clamp_score(task_2_score), 2),
-            "task_3": round(clamp_score(task_3_score), 2)
-        }
+        "task_1": round(clamp_score(task_1_score), 2),
+        "task_2": round(clamp_score(task_2_score), 2),
+        "task_3": round(clamp_score(task_3_score), 2)
     }
 
 @app.post("/baseline")
@@ -119,11 +119,9 @@ def run_baseline():
     (Will connect to our baseline.py logic later).
     """
     return {
-        "scores": {
-            "task_1": 0.99, 
-            "task_2": 0.99, 
-            "task_3": 0.99
-        }
+        "task_1": 0.99, 
+        "task_2": 0.99, 
+        "task_3": 0.99
     }
 
 if __name__ == "__main__":

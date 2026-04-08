@@ -118,7 +118,7 @@ Return ONLY valid raw JSON without markdown block formatting.
     print(f"Grader Scores: {json.dumps(scores, indent=2)}")
 
     # Emit the exact End format required validation
-    final_score = scores.get("scores", {}).get("task_1", 0.0) 
+    final_score = scores.get("task_1", 0.0) 
     success_str = str(final_score >= 0.1).lower()
     rewards_str = ",".join(f"{r:.2f}" for r in rewards_list)
     print(f"[END] success={success_str} steps={steps_taken} score={final_score:.3f} rewards={rewards_str}", flush=True)
