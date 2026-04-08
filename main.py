@@ -40,21 +40,33 @@ def get_tasks():
         "tasks": [
             {
                 "id": "task_1", 
+                "name": "task_1",
+                "task_id": "task_1",
                 "difficulty": "easy", 
                 "description": "Charge the battery with at least 15 MWh combined during the first 12 hours (cheap generation).",
-                "grader": "/grader"
+                "grader": "/grader",
+                "evaluator": "/grader",
+                "has_grader": True
             },
             {
                 "id": "task_2", 
+                "name": "task_2",
+                "task_id": "task_2",
                 "difficulty": "medium", 
                 "description": "Have at least 10 MWh of charge ready right before the peak hours start (hour 17).",
-                "grader": "/grader"
+                "grader": "/grader",
+                "evaluator": "/grader",
+                "has_grader": True
             },
             {
                 "id": "task_3", 
+                "name": "task_3",
+                "task_id": "task_3",
                 "difficulty": "hard", 
                 "description": "Survive the full 24-hour cycle and finish with a total_profit strictly greater than exactly $0.00.",
-                "grader": "/grader"
+                "grader": "/grader",
+                "evaluator": "/grader",
+                "has_grader": True
             }
         ]
     }
