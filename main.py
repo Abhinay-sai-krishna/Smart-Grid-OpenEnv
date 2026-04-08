@@ -57,12 +57,15 @@ def get_tasks():
     }
 
 @app.post("/grader")
-def run_grader(payload: Dict[str, List[Dict[str, Any]]] = Body(...)):
+def run_grader(payload: Any = Body(None)):
     """
-    Expects a payload like {"episode_log": [...] }
-    Each log entry should ideally contain state, action, reward
+    Expects a payload like {"episode_log": [...] } or just a list of steps.
     """
-    episode_log = payload.get("episode_log", [])
+    episode_log = []
+    if isinstance(payload, dict):
+        episode_log = payload.get("episode_log", []) or payload.get("log", [])
+    elif isinstance(payload, list):
+        episode_log = payload
     
     # Simple deterministic grader based on rules from /tasks
     task_1_score = 0.0
@@ -102,9 +105,11 @@ def run_grader(payload: Dict[str, List[Dict[str, Any]]] = Body(...)):
         return min(0.99, max(0.01, float(s)))
     
     return {
-        "task_1": round(clamp_score(task_1_score), 2),
-        "task_2": round(clamp_score(task_2_score), 2),
-        "task_3": round(clamp_score(task_3_score), 2)
+        "scores": {
+            "task_1": round(clamp_score(task_1_score), 2),
+            "task_2": round(clamp_score(task_2_score), 2),
+            "task_3": round(clamp_score(task_3_score), 2)
+        }
     }
 
 @app.post("/baseline")
