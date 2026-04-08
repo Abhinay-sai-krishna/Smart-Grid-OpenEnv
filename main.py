@@ -60,15 +60,11 @@ def get_tasks():
     }
 
 @app.post("/grader")
-def run_grader(payload: Any = Body(None)):
+def run_grader(payload: Dict[str, Any] = Body(default_factory=dict)):
     """
-    Expects a payload like {"episode_log": [...] } or just a list of steps.
+    Expects a payload like {"episode_log": [...] }
     """
-    episode_log = []
-    if isinstance(payload, dict):
-        episode_log = payload.get("episode_log", []) or payload.get("log", [])
-    elif isinstance(payload, list):
-        episode_log = payload
+    episode_log = payload.get("episode_log", []) or payload.get("log", [])
     
     # Simple deterministic grader based on rules from /tasks
     task_1_score = 0.0
